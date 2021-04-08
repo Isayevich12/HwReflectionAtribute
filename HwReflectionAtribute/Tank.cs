@@ -17,7 +17,7 @@ namespace HwReflectionAtribute
             this.Helth = 100;
         }
 
-        public Tank(int helth):this()
+        public Tank(int helth)
         {
             this.Helth = helth;
         }
