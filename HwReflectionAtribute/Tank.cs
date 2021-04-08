@@ -9,7 +9,7 @@ namespace HwReflectionAtribute
     class Tank
     {
         public int Helth { get; private set; }
-        private event Action DamageTakeHandler;
+        private event Action DamageTake;
 
 
         public Tank()
@@ -38,12 +38,18 @@ namespace HwReflectionAtribute
             this.Helth = percent < minLim ? this.Helth : percent > maxLim ? this.Helth = 0 : this.Helth -=this.Helth * percent / 100;
 
 
-            this.DamageTakeHandler += this.Helth == 0 ? () => Console.WriteLine("танк уничтожен!!") :
+            this.DamageTake += this.Helth == 0 ? () => Console.WriteLine("танк уничтожен!!") :
                 () => Console.WriteLine($"Осталось {this.Helth} очков жизни"); ;
 
-            this.DamageTakeHandler.Invoke();
+            this.DamageTake.Invoke();
+
+            this.DamageTake = null;
         }
 
+        public string CheckStatus()
+        {          
+            return  this.Helth == 0? "Танк уничтожен": this.Helth > 0 ?  $"Осталось {this.Helth} очков здоровья": "Вас взломали))";
+        }
 
     }
 }
